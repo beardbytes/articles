@@ -81,12 +81,3 @@ def store_record(elastic_object, index_name, response) -> None:
 
 def search_query(es_object, index_name, body):
     pass
-
-
-if __name__ == '__main__':
-    url = "https://api.spaceflightnewsapi.net/v3/articles"
-    response = connect(url)
-    es = connect_elasticsearch()
-    if es is not None:
-        create_index(es, 'articles')
-        store_record(es, 'articles', response)
