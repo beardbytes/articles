@@ -5,6 +5,9 @@ from ingestion import Injetion as I
 
 from elasticsearch.exceptions import RequestError
 
+import warnings
+warnings.filterwarnings("ignore")
+
 # instance of Flask created
 app = Flask(__name__)
 
@@ -56,7 +59,7 @@ def search() -> Response:
 if __name__ == '__main__':
     # the instance of Injetion class is created and used to call the methods from the ingestion.py module
     inj = I(es, 'articles', response)
-    I.create_index(inj)
+    I.createIndex(inj)
     I.storeRecord(inj)
     try:
         # the flask app is running on 5000 port with debuffing is true
