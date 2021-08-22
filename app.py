@@ -2,7 +2,6 @@ import config as conf
 from flask import Flask, request, jsonify, abort
 from requests.models import Response
 import connect as conn
-from ingestion import Injetion as I
 
 from elasticsearch.exceptions import RequestError
 
@@ -44,12 +43,8 @@ def search() -> Response:
 
 
 if __name__ == '__main__':
-    # the instance of Injetion class is created and used to call the methods from the ingestion.py module
-    inj = I(conn.es, conf.index_name, conn.response)
-    I.createIndex(inj)
-    I.storeRecord(inj)
     try:
-        # the flask app is running on 5000 port with debuffing is true
+        # the flask app is running on 5000 port with debugging set to true
         app.run(port=conf.flask_port, debug=conf.debug)
     except RuntimeError as e:
         pass
