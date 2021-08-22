@@ -1,4 +1,4 @@
-class Injetion():
+class Injetion:
     '''
     Class created to inject the data from public api to ElasticSearch
 
@@ -7,26 +7,23 @@ class Injetion():
     Methods
     -------
     createIndex()
-        Index created in order to create documnets, which are the key-value pairs
+        Index created in order to create documents, which are the key-value pairs
 
     storeRecord()
-        Stores out data in the form of kwy-value pairs in the documnets
+        Stores the data in the form of key-value pairs in the documents
     '''
 
-    def __init__(self, es, index_name, response) -> None:
+    def __init__(self, es, index_name) -> None:
         '''
         Parameters
         ----------
         es : Response
-            Elastic Search instance from connect.py module
+            Elastic Search connection instance
         index_name : str
             The name of the index
-        response : Response
-            The instance from connect.py module
         '''
         self.es = es
         self.index_name = index_name
-        self.response = response
 
     def createIndex(self) -> bool:
         '''
@@ -101,9 +98,14 @@ class Injetion():
         finally:
             return created
 
-    def storeRecord(self) -> None:
+    def storeRecord(self, response) -> None:
         '''
         Stores the data into the index created by createIndex() function in the form of key-value pair
+
+        Parameters
+        ----------
+        response : str
+            Data from the API
 
         Raises
         ------
@@ -111,7 +113,7 @@ class Injetion():
             If the data type present in the fields does not match the incoming data
         '''
         try:
-            for article in self.response:
+            for article in response:
                 _id = article['id']
                 self.es.index(
                     index=self.index_name, doc_type='_doc', id=_id, body=article)
