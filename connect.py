@@ -1,6 +1,10 @@
 import requests
 import logging
 from elasticsearch import Elasticsearch
+import config as conf
+
+import warnings
+warnings.filterwarnings("ignore")
 
 
 class Connect:
@@ -70,3 +74,13 @@ class Connect:
         To catch the stack trace
         '''
         logging.basicConfig(level=logging.ERROR)
+
+
+# the instance of Connect class is created
+conn = Connect(conf.host, conf.elastic_port, conf.url)
+
+# the function connectElasticsearch() instance created
+es = Connect.connectElasticsearch(conn)
+
+# the function connect() instance created
+response = Connect.connect(conn)
