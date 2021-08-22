@@ -15,7 +15,7 @@ class Connect:
         Establishes a connection to public api (https://api.spaceflightnewsapi.net/v3/articles)
 
     connectElasticsearch()
-        Establihes a connection to elasticsearch instance
+        Establihes a connection to elastic search instance
     '''
 
     def __init__(self, host, port, url) -> None:
@@ -53,15 +53,18 @@ class Connect:
         '''
         Returns the connection to ElasticSearch instance
 
-        Prints 'Connection established' if successful else 'Could not connect'
+        Prints 
+        -------
+        'Connection established' if successful else 'Could not connect'
         '''
         _es = None
         _es = Elasticsearch([{'host': self.host, 'port': self.port}])
         if _es.ping():
-            print('Connection established')
+            print('Connection established to elastic search')
         else:
-            print('Could not connect')
+            print('Could not connect to elastic search')
         return _es
+
     if __name__ == '__main__':
         '''
         To catch the stack trace
