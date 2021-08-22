@@ -30,7 +30,7 @@ class Injetion():
 
     def createIndex(self) -> bool:
         '''
-        Creates the document structure in the form of key-value pair
+        Creates the document structure in the form of key-value pair and returns true if index is created
 
         Raises
         ------
