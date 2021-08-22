@@ -12,3 +12,5 @@
 ### Assumptions
 - The method to search query is done in the service pi itlself
 - Seperate function for search is not provided
+
+> **Note: The port number, url, index_name are being read from config.ini**
