@@ -22,6 +22,8 @@ def search() -> Response:
     ------
     RequestError
         If the query is not provided to the url
+    ConnectionError
+        If the connection to elastic search is interrupted, returns a bad gateway(502)
     '''
     try:
         # to get the query
