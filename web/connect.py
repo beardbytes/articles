@@ -1,6 +1,5 @@
 from elasticsearch.exceptions import ConnectionError as ElasticConnectionError
 import requests
-import logging
 from elasticsearch import Elasticsearch
 import config as conf
 from ingestion import Injetion
