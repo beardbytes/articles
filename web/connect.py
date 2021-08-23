@@ -1,4 +1,4 @@
-from elasticsearch.exceptions import ConnectionError as ElasticConnectionError
+import logging
 import requests
 from elasticsearch import Elasticsearch
 import config as conf
@@ -6,6 +6,8 @@ from ingestion import Injetion
 
 import warnings
 warnings.filterwarnings("ignore")
+
+logger = logging.getLogger(__name__)
 
 
 class Connect:
@@ -64,20 +66,17 @@ class Connect:
         '''
         _es = None
         while True:
-            try:
-                _es = Elasticsearch([{'host': host, 'port': port}])
-                connected = _es.ping()
-                if connected:
-                    print('Connection established to elastic search')
-                else:
-                    print("Not connected")
-                    break
-                return _es
-            except ElasticConnectionError as e:
-                raise e
+            _es = Elasticsearch([{'host': host, 'port': port}])
+            connected = _es.ping()
+            if connected:
+                print('Connection established to elastic search')
+            else:
+                print("Not connected to elastic search")
+                break
+            return _es
 
 
-            # the instance of Connect class is created
+# the instance of Connect class is created
 conn = Connect()
 
 # the function connectElasticsearch() instance created
