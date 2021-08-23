@@ -3,8 +3,7 @@ from flask import Flask, request, jsonify, abort
 from requests.models import Response
 import connect as conn
 
-from elasticsearch.exceptions import RequestError
-
+from elasticsearch.exceptions import RequestError, ConnectionError
 
 # instance of Flask created
 app = Flask(__name__)
@@ -41,6 +40,8 @@ def search() -> Response:
         return jsonify(res['hits']['hits'])
     except RequestError as e:
         abort(e.status_code, str(e))
+    except ConnectionError as e:
+        return jsonify({"error": "Connection Interrupted"},), 502
 
 
 if __name__ == '__main__':
