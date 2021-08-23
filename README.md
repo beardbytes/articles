@@ -4,13 +4,14 @@
 - `docker-compose up build`
 
 ### Run
-- `docker-compose up -d`
-- After running the above command, go to "http://localhost:5010/search?q=Space" url
+- Run the following two commnds:
+    - `.\autostart.bat` => to start the elasticseach instance
+    - `python web/app.py` => to start the web service
+- After running the above command, go to [http://localhost:5000/search?q=Space]("http://localhost:5000/search?q=Space") url
 - You can provide different *keywords* to the query like *SpaceNews, NASA, Tesla, etc* to get JSON list of data
-- To test the query => `curl -X 'GET' "http://localhost:5010/search?q=Space"`
+- `docker-ccompose down` -> to stop the elasticseach instance
 
 ### Assumptions
-- The method to search query is done in the service pi itlself
-- Seperate function for search is not provided
+- The elastic search instance and service are running independently
 
-> **Note: The port number, url, index_name are being read from config.py**
+> **Note: When the elastic search instance runs, wait for 10sec to run python script. Otherwise the script will show that its not connected**
