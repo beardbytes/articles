@@ -23,7 +23,7 @@ def search() -> Response:
     RequestError
         If the query is not provided to the url
     ConnectionError
-        If the connection to elastic search is interrupted, returns a bad gateway(502)
+        If the connection to elastic search is interrupted
     '''
     try:
         # to get the query
@@ -43,7 +43,7 @@ def search() -> Response:
     except RequestError as e:
         abort(e.status_code, str(e))
     except ConnectionError as e:
-        return jsonify({"error": "Connection Interrupted"},), 502
+        return jsonify({"error": "Connection Interrupted"},), e.status_code
 
 
 if __name__ == '__main__':
