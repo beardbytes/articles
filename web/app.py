@@ -44,7 +44,7 @@ def search() -> Response:
 
 
 if __name__ == '__main__':
-    if conn.es.ping():
+    if conn.es:
         # the flask app is running on 5000 port with debugging set to true
         app.run(port=conf.flask_port, debug=conf.debug)
     else:
