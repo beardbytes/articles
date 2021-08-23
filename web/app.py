@@ -3,7 +3,7 @@ from flask import Flask, request, jsonify, abort
 from requests.models import Response
 import connect as conn
 
-from elasticsearch.exceptions import RequestError, ConnectionError
+from elasticsearch.exceptions import RequestError, ConnectionError, NotFoundError
 
 # instance of Flask created
 app = Flask(__name__)
@@ -24,6 +24,8 @@ def search() -> Response:
         If the query is not provided to the url
     ConnectionError
         If the connection to elastic search is interrupted
+    NotFoundError
+        If the index is not found in elastic search
     '''
     try:
         # to get the query
@@ -44,6 +46,8 @@ def search() -> Response:
         abort(e.status_code, str(e))
     except ConnectionError as e:
         return jsonify({"error": "Connection Interrupted"},), e.status_code
+    except NotFoundError as e:
+        abort(e.status_code, str(e))
 
 
 if __name__ == '__main__':
