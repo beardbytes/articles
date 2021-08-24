@@ -1,0 +1,8 @@
+API:
+  port: "5000"
+  debug: "True"
+ELASTICSEARCH:
+  host: "host.docker.internal"
+  port: "9200"
+  url: "https://api.spaceflightnewsapi.net/v3/articles"
+  index_name: "articles"
