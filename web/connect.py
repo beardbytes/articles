@@ -1,4 +1,3 @@
-import logging
 import requests
 from elasticsearch import Elasticsearch
 import config as conf
@@ -7,14 +6,12 @@ from ingestion import Injetion
 import warnings
 warnings.filterwarnings("ignore")
 
-logger = logging.getLogger(__name__)
-
 
 class Connect:
     '''
     A class to establish connection to the public api and ElasticSearch
 
-    ....
+    -------
 
     Methods
     -------
@@ -66,7 +63,8 @@ class Connect:
         '''
         _es = None
         while True:
-            _es = Elasticsearch([{'host': host, 'port': port}])
+            _es = Elasticsearch(
+                [{'host': host, 'port': port}])
             connected = _es.ping()
             if connected:
                 print('Connection established to elastic search')
