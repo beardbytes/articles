@@ -1,3 +1,7 @@
+import json
+import config as conf
+
+
 class Injetion:
     '''
     Class created to inject the data from public api to ElasticSearch
@@ -35,59 +39,12 @@ class Injetion:
             If the index created does not conform to the keys present in the incoming data
         '''
         created = False
-        # index settings
-        settings = {
-            "settings": {
-                "number_of_shards": 1,
-                "number_of_replicas": 0,
-            },
-            "mappings": {
-                "dynamic": "strict",
-                "properties": {
-                    "id": {
-                        "type": "integer"
-                    },
-                    "title": {
-                        "type": "text"
-                    },
-                    "url": {
-                        "type": "text"
-                    },
-                    "imageUrl": {
-                        "type": "text"
-                    },
-                    "newsSite": {
-                        "type": "text"
-                    },
-                    "summary": {
-                        "type": "text"
-                    },
-                    "publishedAt": {
-                        "type": "date"
-                    },
-                    "updatedAt": {
-                        "type": "date"
-                    },
-                    "featured": {
-                        "type": "boolean"
-                    },
-                    "launches": {
-                        "type": "nested",
-                        "properties": {
-                            "id": {"type": "text"},
-                            "provider": {"type": "text"}
-                        }
-                    },
-                    "events": {
-                        "type": "nested",
-                        "properties": {
-                            "id": {"type": "text"},
-                            "provider": {"type": "text"}
-                        }
-                    },
-                }
-            }
-        }
+        settings = {}
+        # json file containing the index settings and fields is loaded
+        file_path = conf.file_path
+        with open(file_path, 'r') as f:
+            data = json.loads(f.read())
+        settings = data
         try:
             if not self.es.indices.exists(self.index_name):
                 self.es.indices.create(index=self.index_name, body=settings)
