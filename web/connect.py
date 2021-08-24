@@ -86,5 +86,5 @@ response = Connect.connect(conn, conf.url)
 # the instance of Injetion class is created and used to call the methods from the ingestion.py module
 if es:
     inj = Injetion(es, conf.index_name)
-    Injetion.createIndex(inj)
+    Injetion.createIndex(inj, conf.file_path)
     Injetion.storeRecord(inj, response)
