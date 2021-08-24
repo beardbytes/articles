@@ -1,2 +1,2 @@
 @echo off
-docker-compose up -d elasticsearch
+docker-compose up -d
