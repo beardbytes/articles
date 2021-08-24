@@ -1,0 +1,60 @@
+{
+    "settings": {
+        "number_of_shards": 1,
+        "number_of_replicas": 0
+    },
+    "mappings": {
+        "dynamic": "strict",
+        "properties": {
+            "id": {
+                "type": "integer"
+            },
+            "title": {
+                "type": "text"
+            },
+            "url": {
+                "type": "text"
+            },
+            "imageUrl": {
+                "type": "text"
+            },
+            "newsSite": {
+                "type": "text"
+            },
+            "summary": {
+                "type": "text"
+            },
+            "publishedAt": {
+                "type": "date"
+            },
+            "updatedAt": {
+                "type": "date"
+            },
+            "featured": {
+                "type": "boolean"
+            },
+            "launches": {
+                "type": "nested",
+                "properties": {
+                    "id": {
+                        "type": "text"
+                    },
+                    "provider": {
+                        "type": "text"
+                    }
+                }
+            },
+            "events": {
+                "type": "nested",
+                "properties": {
+                    "id": {
+                        "type": "text"
+                    },
+                    "provider": {
+                        "type": "text"
+                    }
+                }
+            }
+        }
+    }
+}
