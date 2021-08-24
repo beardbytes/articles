@@ -78,7 +78,7 @@ class Connect:
 conn = Connect()
 
 # the function connectElasticsearch() instance created
-es = Connect.connectElasticsearch(conn, conf.host, conf.elastic_port)
+es = Connect.connectElasticsearch(conn, conf.elastic_host, conf.elastic_port)
 
 # the function connect() instance created
 response = Connect.connect(conn, conf.url)
