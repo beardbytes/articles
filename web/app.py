@@ -53,6 +53,6 @@ def search() -> Response:
 if __name__ == '__main__':
     if conn.es:
         # the flask app is running on 5000 port with debugging set to true
-        app.run(port=conf.flask_port, debug=conf.debug, host='0.0.0.0')
+        app.run(port=conf.flask_port, debug=conf.debug, host=conf.flask_host)
     else:
         pass
