@@ -1,5 +1,4 @@
 import json
-import config as conf
 
 
 class Injetion:
@@ -29,9 +28,14 @@ class Injetion:
         self.es = es
         self.index_name = index_name
 
-    def createIndex(self) -> bool:
+    def createIndex(self, file_path) -> bool:
         '''
         Creates the document structure in the form of key-value pair and returns true if index is created
+
+        Parameter
+        ---------
+        file_path : str
+            the name of the file containing the index
 
         Raises
         ------
@@ -41,7 +45,6 @@ class Injetion:
         created = False
         settings = {}
         # json file containing the index settings and fields is loaded
-        file_path = conf.file_path
         with open(file_path, 'r') as f:
             data = json.loads(f.read())
         settings = data
@@ -77,6 +80,3 @@ class Injetion:
         except Exception as ex:
             print('Error in indexing data')
             print(str(ex))
-
-    def searchQuery(es_object, index_name, body):
-        pass
