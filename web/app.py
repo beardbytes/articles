@@ -2,6 +2,7 @@ import config as conf
 from flask import Flask, request, jsonify, abort
 from requests.models import Response
 import connect as conn
+from ingestion import Injetion
 
 from elasticsearch.exceptions import RequestError, ConnectionError, NotFoundError
 
@@ -51,6 +52,21 @@ def search() -> Response:
 
 
 if __name__ == '__main__':
+    # the instance of Connect class is created
+    conn = conn()
+
+    # the function connectElasticsearch() instance created
+    es = conn.connectElasticsearch(conn, conf.elastic_host, conf.elastic_port)
+
+    # the function connect() instance created
+    response = conn.connect(conn, conf.url)
+
+    # the instance of Injetion class is created and used to call the methods from the ingestion.py module
+    if es:
+        inj = Injetion(es, conf.index_name)
+        Injetion.createIndex(inj, conf.file_path)
+        Injetion.storeRecord(inj, response)
+
     if conn.es:
         # the flask app is running on 5000 port with debugging set to true
         app.run(port=conf.flask_port, debug=conf.debug, host=conf.flask_host)
