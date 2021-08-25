@@ -1,7 +1,5 @@
 import requests
 from elasticsearch import Elasticsearch
-import config as conf
-from ingestion import Injetion
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -72,19 +70,3 @@ class Connect:
                 print("Not connected to elastic search")
                 break
             return _es
-
-
-# the instance of Connect class is created
-conn = Connect()
-
-# the function connectElasticsearch() instance created
-es = Connect.connectElasticsearch(conn, conf.elastic_host, conf.elastic_port)
-
-# the function connect() instance created
-response = Connect.connect(conn, conf.url)
-
-# the instance of Injetion class is created and used to call the methods from the ingestion.py module
-if es:
-    inj = Injetion(es, conf.index_name)
-    Injetion.createIndex(inj, conf.file_path)
-    Injetion.storeRecord(inj, response)
